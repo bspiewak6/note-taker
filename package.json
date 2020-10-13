@@ -1,7 +1,7 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Description As a small business owner, the user wants to be able to write and save notes so that they can organize their thoughts and keep track of tasks they need to complete.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  }
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bspiewak6/note-taker.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/bspiewak6/note-taker/issues"
+  },
+  "homepage": "https://github.com/bspiewak6/note-taker#readme"
 }
