@@ -1,40 +1,66 @@
+// dependencies
 const express = require('express');
-const app = express();
-const fs = require('fs');
-
-const PORT = process.env.PORT || 3006;
 const path = require('path');
 
-//  const { notes } = require('./')
+const app = express();
+const PORT = process.env.PORT || 3001;
 
+// const fs = require('fs');
+// const index = require('./public/assets/js/index');
+const { notes } = require('./db/db.json');
 
-// get route to send files to index.html
+// parse incoming string or array data
+app.use(express.urlencoded({ extended: true }));
+// parse incoming JSON data
+app.use(express.json());
+
+// use express.static to link up css and js files that were provided by client
+app.use(express.static('public'));
+
+// routes =====================================================
+// create a home route '/' that returns index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-// get route to the notes.html
+// create a '/notes' route that returns notes.html
 app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-// create POST route to add new notes to JSON file
-app.post('/api/notes', (req, res) => {
-  // req.body is where our incoming content will be
-  console.log(req.body);
-  res.json(req.body);
+// get route for saved notes
+app.get('/api/notes', (req, res) => {
+  return res.json(notes);
 });
 
-// use express.static to link up the files that were provided by client
-app.use(express.static('public'));
+// app.get('/api/notes/:id', (req, res) => {
+//   const savedNote = req.params.id;
 
-// parse incoming string or array data
-app.use(express.urlencoded({ extended: true }));
+//   console.log(savedNote);
 
-// parse incoming JSON data
-app.use(express.json());
+//   for (let i = 0; i < notes.length; i++) {
+//     if (savedNote === notes[i].id) {
+//       return res.json(notes[i]);
+//     }
+//   }
+//   return res.json(false);
+// });
 
-// initial port that is setup to run the server
+// create POST route that adds new notes
+// app.post('/api/notes', (req, res) => {
+//   const newNote = req.body;
+
+//   // newNote.id = newNote.title.replace(/\s+/g, '').toLowerCase();
+  
+//   newNote.id = notes.length.toString();
+
+//   console.log(newNote);
+
+//   notes.push(newNote);
+//   res.json(newNote);
+// });
+
+// listener that is setup to run the server on PORT
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
 });

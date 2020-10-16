@@ -1,3 +1,7 @@
+// require fs and path
+const fs = require('fs');
+const path = require('path');
+
 var $noteTitle = $(".note-title");
 var $noteText = $(".note-textarea");
 var $saveNoteBtn = $(".save-note");
@@ -53,12 +57,20 @@ var renderActiveNote = function() {
 var handleNoteSave = function() {
   var newNote = {
     title: $noteTitle.val(),
-    text: $noteText.val()
+    text: $noteText.val(),
+    // id: $noteId.val()
   };
+
+  // write notes to db.json file
+  fs.writeFileSync(
+    path.join(__dirname, '../../db/db.json'),
+    JSON.stringify({notes: newNote}, null, 2)
+  );
 
   saveNote(newNote).then(function(data) {
     getAndRenderNotes();
     renderActiveNote();
+
   });
 };
 
