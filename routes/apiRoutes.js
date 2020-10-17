@@ -46,6 +46,7 @@ module.exports = function(app) {
         for (let i = 0; i < data.length; i++) {
             const currentNote = data[i];
             currentNote.id = newId.toString();
+            newId++;
         }
 
         // write the remaining notes to the db.json file
