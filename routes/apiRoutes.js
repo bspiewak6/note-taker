@@ -1,7 +1,7 @@
 const fs = require("fs");
-var data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 
-
+// api routes 
 module.exports = function(app) {
     app.get("/api/notes", function(req, res) {
         res.json(data);
@@ -13,6 +13,8 @@ module.exports = function(app) {
 
     app.post("/api/notes", function(req, res) {
         let newNote = req.body;
+        console.log(newNote);
+
         let uniqueId = (data.length).toString();
         console.log(uniqueId);
         
@@ -25,4 +27,25 @@ module.exports = function(app) {
 
         res.json(data);    
     });
+
+
+// add delete functionality
+    app.delete("/api/notes/:id", function(req, res) {
+
+        let noteId = req.params.id;
+        let newId = 0;
+    
+        data = data.filter(currentNote => {
+        return currentNote.id != noteId;
+        });
+
+        for (currentNote of data) {
+            currentNote.id = newId.toString();
+        }
+        fs.writeFileSync("./db/db.json", JSON.stringify(data));
+        res.json(data);
+
+        console.log(`Deleting note with id ${noteId}`);
+    }); 
 };
+

@@ -24,7 +24,8 @@ var saveNote = function(note) {
   });
 };
 
-// BONUS A function for deleting a note from the db
+
+// A function for deleting a note from the db
 var deleteNote = function(id) {
   return $.ajax({
     url: "api/notes/" + id,
@@ -55,7 +56,7 @@ var handleNoteSave = function() {
     title: $noteTitle.val(),
     text: $noteText.val(),
   };
-// UPDATED TO ARROW FUNCTION AND REMOVED PARAMETER
+
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -71,7 +72,7 @@ var handleNoteDelete = function(event) {
   if (activeNote.id === note.id) {
     activeNote = {};
   }
-
+//+++++++++++++++++++++++++++++
   deleteNote(note.id).then(function() {
     getAndRenderNotes();
     renderActiveNote();
@@ -106,8 +107,6 @@ var renderNoteList = function(notes) {
 
   var noteListItems = [];
 
-
-  // ADD IN DELETE FUNCTIONALITY??
   for (var i = 0; i < notes.length; i++) {
     var note = notes[i];
 

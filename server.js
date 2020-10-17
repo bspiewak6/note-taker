@@ -3,7 +3,6 @@
 const express = require("express");
 const fs = require("fs");
 
-
 // Sets up Express app and PORT
 // =============================================================
 var app = express();
@@ -18,8 +17,10 @@ app.use(express.static('public'));
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
+
 // Listener
 // =============================================================
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
 });
+
