@@ -1,7 +1,3 @@
-// require fs and path
-const fs = require('fs');
-const path = require('path');
-
 var $noteTitle = $(".note-title");
 var $noteText = $(".note-textarea");
 var $saveNoteBtn = $(".save-note");
@@ -58,31 +54,20 @@ var handleNoteSave = function() {
   var newNote = {
     title: $noteTitle.val(),
     text: $noteText.val(),
-    // id: $noteId.val()
   };
-
-  // write notes to db.json file
-  fs.writeFileSync(
-    path.join(__dirname, '../../db/db.json'),
-    JSON.stringify({notes: newNote}, null, 2)
-  );
-
-  saveNote(newNote).then(function(data) {
+// UPDATED TO ARROW FUNCTION AND REMOVED PARAMETER
+  saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
-
   });
 };
 
-// BONUS Delete the clicked note
+// Delete the clicked note
 var handleNoteDelete = function(event) {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
 
-  var note = $(this)
-    .parent(".list-group-item")
-    .data();
-
+  var note = $(this).parent(".list-group-item").data();
   if (activeNote.id === note.id) {
     activeNote = {};
   }
@@ -121,6 +106,8 @@ var renderNoteList = function(notes) {
 
   var noteListItems = [];
 
+
+  // ADD IN DELETE FUNCTIONALITY??
   for (var i = 0; i < notes.length; i++) {
     var note = notes[i];
 
