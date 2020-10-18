@@ -29,7 +29,6 @@ module.exports = function(app) {
         res.json(data);    
     });
 
-
 // DELETE route to remove notes from left sidebar
     app.delete("/api/notes/:id", function(req, res) {
         let noteId = req.params.id;

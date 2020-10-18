@@ -28,4 +28,5 @@ As a small business owner, the user wants to be able to write and save notes so 
 6. Lastly, the user can click on the Write icon in the navigation at the top of the page and they are given empty fields to enter a new note title and the note’s text in the right-hand column
 
 ## Links
+* [Note Taker Deployed App](https://guarded-brook-07046.herokuapp.com/)
 * [Note Taker App Repository](https://github.com/bspiewak6/note-taker)
